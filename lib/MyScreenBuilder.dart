@@ -2,6 +2,7 @@ import 'package:photo_upload/ProfilePage.dart';
 import 'package:flutter/material.dart';
 import 'MyNavBar.dart';
 import 'HomePage.dart';
+import 'GalleryPage.dart';
 
 class MyScreenBuilder extends StatefulWidget {
 
@@ -64,7 +65,7 @@ class _MyScreenBuilderState extends State<MyScreenBuilder> {
       case 1:
         return HomeScreen();
       case 2:
-        return Center(child: Text('Gallery'));
+        return GalleryPage();
       default:
         return Container();
     }

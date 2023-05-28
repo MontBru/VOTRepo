@@ -60,7 +60,7 @@ class MyUserInfo {
     return email;
   }
 
-  Future<List<dynamic>> getImages(String uid) async{
+  static Future<List<dynamic>> getImages(String uid) async{
     MyUserInfo userInfo=await readUser(uid);
     List<dynamic> images=userInfo.images;
     return images;
