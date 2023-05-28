@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "949317398911",
+    "project_id": "photoupload-a98bb",
+    "storage_bucket": "photoupload-a98bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949317398911:android:bf88ca01cdda3b72edaa4a",
+        "android_client_info": {
+          "package_name": "com.example.photo_upload"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEueSmoTMXhrf4i5U7QZ5WqRQC_ingn-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
