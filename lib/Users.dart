@@ -4,27 +4,30 @@ class MyUserInfo {
   late final String username;
   late final String email;
   late final String uid;
+  late final List<dynamic> images;
 
-  MyUserInfo(this.username, this.email, this.uid);
+
+  MyUserInfo(this.username, this.email, this.uid, this.images);
 
   factory MyUserInfo.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> snapshot,
       SnapshotOptions? options,
       ) {
     final data = snapshot.data();
-    return MyUserInfo(data?['username'], data?['email'], data?['uid']);
+    return MyUserInfo(data?['username'], data?['email'], data?['uid'], data?['images']);
   }
 
   Map<String, dynamic> toFirestore() {
     return {
       "username": username,
       "email": email,
-      "uid": uid
+      "uid": uid,
+      "images": images
     };
   }
 
-  Future<MyUserInfo> readUser(String uid) async {
-    MyUserInfo user = MyUserInfo("", "", "");
+  static Future<MyUserInfo> readUser(String uid) async {
+    MyUserInfo user = MyUserInfo("", "", "",[]);
 
     final ref = FirebaseFirestore.instance.collection('users').doc(uid).withConverter(
       fromFirestore: MyUserInfo.fromFirestore,
@@ -55,5 +58,18 @@ class MyUserInfo {
     MyUserInfo userInfo = await readUser(uid);
     String email = userInfo.email;
     return email;
+  }
+
+  Future<List<dynamic>> getImages(String uid) async{
+    MyUserInfo userInfo=await readUser(uid);
+    List<dynamic> images=userInfo.images;
+    return images;
+  }
+
+  static Future<void> addImage(String uid, String image) async {
+    MyUserInfo currUser=await MyUserInfo.readUser(uid);
+    currUser.images.add(image);
+    await FirebaseFirestore.instance.collection('users').doc(uid)
+        .update({'images': currUser.images});
   }
 }

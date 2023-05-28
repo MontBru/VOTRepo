@@ -14,7 +14,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final User? currentUser = Auth().currentUser;
 
-  MyUserInfo userInfo = new MyUserInfo("","","");
+  MyUserInfo userInfo = new MyUserInfo("","","",[]);
 
   @override
   Widget build(BuildContext context) {

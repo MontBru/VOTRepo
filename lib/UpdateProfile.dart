@@ -14,7 +14,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
   Future<void> changePasswordAndUsername() async {
     await FirebaseAuth.instance.currentUser!.updatePassword(_controllerPassword.text);
-    await MyUserInfo("","","").changeUsername(FirebaseAuth.instance.currentUser!.uid, _controllerUsername.text);
+    await MyUserInfo("","","",[]).changeUsername(FirebaseAuth.instance.currentUser!.uid, _controllerUsername.text);
   }
 
   @override

@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
     String? uid = FirebaseAuth.instance.currentUser?.uid.toString();
 
     if(uid != null) {
-      MyUserInfo user = MyUserInfo(username, email, uid);
+      MyUserInfo user = MyUserInfo(username, email, uid,[]);
 
 
       //now below I am getting an instance of firebaseiestore then getting the user collection
