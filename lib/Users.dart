@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class MyUserInfo {
   late final String username;
@@ -71,5 +72,18 @@ class MyUserInfo {
     currUser.images.add(image);
     await FirebaseFirestore.instance.collection('users').doc(uid)
         .update({'images': currUser.images});
+  }
+
+  static Future<void> removeImage(String uid, String image) async {
+    MyUserInfo currUser=await MyUserInfo.readUser(uid);
+    currUser.images.remove(image);
+    await FirebaseFirestore.instance.collection('users').doc(uid)
+        .update({'images': currUser.images});
+    Reference storageRef = FirebaseStorage.instance.refFromURL(image);
+    try{
+      await storageRef.delete();
+    }catch(e){
+      print('Error deleting file: $e');
+    }
   }
 }

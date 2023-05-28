@@ -22,9 +22,8 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
       firstCamera,
       ResolutionPreset.medium,
     );
-    _initializeControllerFuture = _controller.initialize();
     setState(() {
-
+      _initializeControllerFuture = _controller.initialize();
     });
   }
 

@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
-        title: const Center(child: Text('EcoWare')),
+        title: const Center(child: Text('PhotoUpload')),
       ),
       body: Container(
         height: double.infinity,

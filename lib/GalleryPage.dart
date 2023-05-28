@@ -14,9 +14,8 @@ class _GalleryPageState extends State<GalleryPage> {
   List<dynamic> images=[];
 
   void setup() async{
-    images=await MyUserInfo.getImages(FirebaseAuth.instance.currentUser!.uid.toString());
-    setState(() {
-
+    setState(() async{
+      images=await MyUserInfo.getImages(FirebaseAuth.instance.currentUser!.uid.toString());
     });
   }
 
@@ -34,8 +33,27 @@ class _GalleryPageState extends State<GalleryPage> {
           itemBuilder: (BuildContext context, int index){
             return Column(
               children: [
-                Container(
-                  child: Image.network(images[index]),
+                Stack(
+                  children:[ Positioned(
+                    child: Container(
+                      child: Image.network(images[index]),
+                    ),
+                  ),
+                    Positioned(
+
+                        child: FloatingActionButton(
+                        onPressed: (){
+                         setState(() {
+                           MyUserInfo.removeImage(FirebaseAuth.instance.currentUser!.uid.toString(), images[index]);
+                         });
+                        },
+                            backgroundColor: Colors.transparent,
+                        child:Icon(
+                          Icons.delete_outline_outlined,
+                          color: Colors.red,
+                        )
+                    ))
+                  ]
                 ),
                 Container(
                   height:30 ,
