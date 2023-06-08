@@ -1,16 +1,47 @@
-# photo_upload
+Документация в Google Docs: https://docs.google.com/document/d/14iwDYpAUgYcjcCmFVqtRjU7iLupwcNwV9dzSs_2tHqc/edit
 
-A new Flutter project.
+Приложение за качване на снимки в клауд
+Изготвено от Браян Монтичелли 11В клас
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+1.Сетъп
 
-A few resources to get you started if this is your first Flutter project:
+За да се сетъпне приложението трябва да се pull-нат всички файлове от Гитхъб репото в някой VS Code или Android Studio Flutter проект. След това трябва да свържете телефона към някой USB port и да натиснете бутона Run. Ако не сте включили Developer options на телефона си няма да може да се изтегли.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2. Фронт енд
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Приложението се състои от три страници: профилна страница, страница с камера и галерия. Фронт ендът е написан изцяло на Flutter. Когато се влезне в приложението се прави проверка във Firebase Authentication дали има логнат акаунт. Ако няма се изпраща потребителя към login/register страница, ако има - директно към приложението.
+
+Всички страници от приложението имат AppBar и Navigation Bar. Затова реших да ги изнеса в отделен файл и да се зареждат само веднъж. Добавил съм и възможност за смяна на страници чрез плъзгане на пръста наляво или надясно. 
+
+В профилната страница се показват името, имейлът и профилна снимка(тя е еднаква за всички потребители и не може да се сменя), както и бутон за излизане от профила. Когато се натисне бутона за излизане от профила, потребителят се изпраща към login/register страницата.
+
+В страницата за камерата използвам 'package:camera/camera.dart', за да имам достъп до камерата на потребителя, както и един FloatingActionButton, за да има възможност да се правят снимки. 
+
+В страницата за галерията се показват всички снимки на текущия потребител. За да се покажат съм използвал ListView, което генерира снимките и по един бутон за триене на снимка.
+
+3. Бек енд
+
+Бек ендът ми е основно работа с Firebase. Използвам 3 от услугите предоставени от Firebase - Firebase Authentication, Firebase Storage и Cloud Firestore. 
+
+Firebase Authentication
+
+Използвал съм Firebase Authentication за запазването на паролата и имейла на всички потребители. Той автоматично генерира UID(User ID), което след това се използва за идентификация в останалите услуги на Firebase.
+
+Cloud Firestore
+
+Използвал съм Cloud Firestore за запазването на информация за потребителите - потребителско име и кои снимки са техни. Cloud Firestore работи с документи в json формат и за идентификация просто документа за даден потребител е кръстен с UID-то на този потребител.
+
+Firestore Storage
+
+Използвал съм Firestore Storage за запазването на снимките, тъй като другите услуги не го позволяват.
+
+
+
+
+
+
+
+4.High Availability, Scalability и Extensibility
+
+Firebase е базирано на Google Cloud и предоставя огромен потенциал за Scalability и High Availability. Относно Extensibility съм предприел няколко мерки в кода, които да предоставят лесното добавяне на страници. Тези мерки включват: изнесени функиции за работа с базата данни, наличието на файл MyScreenBuilder.dart, който позволява добавяне на страница само с добавяне на нов case в switch case конструкцията. Повтарящите се widget-и(AppBar & NavBar) се изнесени и промени върху тях стига да се правят само по веднъж, а не за всяка страница.
